@@ -1,5 +1,6 @@
 # Load dataset
 import csv
+import datetime
 import pandas
 from matplotlib import pyplot
 from sklearn.model_selection import train_test_split
@@ -49,7 +50,8 @@ for name, model in models:
 	print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
 lda=LinearDiscriminantAnalysis()
 lda.fit(X_train,Y_train)
-user = api.get_user('laluprasadrjd')
+uname='iSachinDeshwal'
+user = api.get_user(uname)
 tweet=user.status
 if (user.verified)== True:
 	a=1
@@ -59,6 +61,20 @@ if (user.default_profile)== True:
 	b=0
 else:
 	b=1
-X_new=np.array([[user.statuses_count,(tweet.favorite_count/user.followers_count)*1000,user.friends_count,len(user.description),user.favourites_count,a,b]])
+endDate =   datetime.datetime(2020, 4, 13, 0, 0, 0)
+startDate = datetime.datetime(2020, 4, 7, 0, 0, 0)
+
+tweets = []
+tmpTweets = api.user_timeline(uname)
+for tweet in tmpTweets:
+    if (tweet.created_at < endDate and tweet.created_at > endDate): tweets.append(tweet.favorite_count)
+while (tmpTweets[-1].created_at > startDate):
+    tmpTweets = api.user_timeline(uname, max_id = tmpTweets[-1].id)
+    for tweet in tmpTweets:
+        if tweet.created_at < endDate and tweet.created_at > startDate:
+            tweets.append(tweet.favorite_count)
+tweets.sort()
+X_new=np.array([[user.statuses_count,(tweets[-1]/user.followers_count)*1000,user.friends_count,len(user.description),user.favourites_count,a,b]])
+print(X_new)
 prediction = lda.predict(X_new)
 print("prediction: {}" .format(prediction))
