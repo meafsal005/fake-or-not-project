@@ -30,9 +30,8 @@ def home(request):
 
 def fakeornot(request):
     auth = tweepy.OAuthHandler(
-        "x4yJNIGwJBspKCD3jXps0udJm", "Xzi5PvN4rHvqBr6kPgcUCiSRDLLGLFJDFRZ1gPAvXxv5kvhyZZ")
-    auth.set_access_token("2491739339-q9jEkfotc22ETdAKFGNWiKLY7NCAtmy5cMbbMXI",
-                          "UqdiqHDl1h5czl9jxpgDZQezm9mw88hA3qzX3Q72yHTA1")
+        "*****")
+    auth.set_access_token("*****")
     api = tweepy.API(auth)
     names = ['twtCount', 'engRatio', 'frndcount', 'biolen',
         'likecount', 'verified', 'default', 'class']
@@ -113,8 +112,8 @@ def fakeornot(request):
 
 
 
-	    auth =tweepy.OAuthHandler("x4yJNIGwJBspKCD3jXps0udJm","Xzi5PvN4rHvqBr6kPgcUCiSRDLLGLFJDFRZ1gPAvXxv5kvhyZZ")
-	    auth.set_access_token("2491739339-q9jEkfotc22ETdAKFGNWiKLY7NCAtmy5cMbbMXI","UqdiqHDl1h5czl9jxpgDZQezm9mw88hA3qzX3Q72yHTA1")
+	    auth =tweepy.OAuthHandler("******")
+	    auth.set_access_token("******")
 	    api= tweepy.API(auth)
 	    user = api.get_user(p)
 	    tweet=user.status
